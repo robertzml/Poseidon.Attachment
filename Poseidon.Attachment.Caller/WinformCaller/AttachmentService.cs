@@ -10,6 +10,7 @@ namespace Poseidon.Attachment.Caller.WinformCaller
     using Poseidon.Attachment.Caller.Facade;
     using Poseidon.Attachment.Core.BL;
     using Poseidon.Attachment.Core.DL;
+    using Poseidon.Attachment.Core.Utility;
 
     /// <summary>
     /// 附件业务访问服务类
@@ -32,5 +33,27 @@ namespace Poseidon.Attachment.Caller.WinformCaller
             this.bl = this.baseBL as AttachmentBusiness;
         }
         #endregion //Constructor
+
+        #region Method
+        /// <summary>
+        /// 上传单个附件
+        /// </summary>
+        /// <param name="data">上传附件信息</param>
+        /// <returns></returns>
+        public async Task<Attachment> Upload(UploadInfo data)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 上传多个附件
+        /// </summary>
+        /// <param name="data">上传附件信息</param>
+        /// <returns></returns>
+        public async Task<List<Attachment>> Upload(List<UploadInfo> data)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion //Method
     }
 }
