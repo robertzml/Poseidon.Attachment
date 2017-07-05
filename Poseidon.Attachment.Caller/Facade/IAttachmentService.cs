@@ -20,7 +20,7 @@ namespace Poseidon.Attachment.Caller.Facade
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        Task<Attachment> Upload(UploadInfo data);
+        Task<List<Attachment>> Upload(UploadInfo data);
 
         /// <summary>
         /// 上传多个附件

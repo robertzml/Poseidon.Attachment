@@ -71,18 +71,18 @@ namespace Poseidon.Attachment.UnitTest
         [TestMethod]
         public void TestUpload1()
         {
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\兔斯基.jpg";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\123.jpg";
 
             UploadInfo info = new UploadInfo();
-            info.Name = "图片";
-            info.Remark = "备注";
+            info.Name = "22";
+            info.Remark = "8dfs";
             info.LocalPath = filePath;
 
             var result = CallerFactory<IAttachmentService>.Instance.Upload(info);
 
             var attachment = result.Result;
 
-            Assert.AreEqual(info.Name, attachment.Name);
+            Assert.AreEqual(info.Name, attachment.First().Name);
         }
         #endregion //Test
     }

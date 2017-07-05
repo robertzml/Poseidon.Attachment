@@ -43,7 +43,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
             var fileContent = new ByteArrayContent(File.ReadAllBytes(uploadInfo.LocalPath));
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = Path.GetFileName(uploadInfo.LocalPath),
+                FileName = Path.GetFileName(uploadInfo.LocalPath)
             };
 
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(Path.GetFileName(uploadInfo.LocalPath)));
@@ -63,11 +63,12 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        public async Task<Attachment> Upload(UploadInfo data)
+        public async Task<List<Attachment>> Upload(UploadInfo data)
         {
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 using (var content = new MultipartFormDataContent())//表明是通过multipart/form-data的方式上传数据  
                 {
@@ -79,8 +80,8 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
                     var response = await client.PostAsync(url, content);
 
                     response.EnsureSuccessStatusCode();
-                    var entity = response.Content.ReadAsAsync<Attachment>();
-
+                    var entity = response.Content.ReadAsAsync<List<Attachment>>();
+                                        
                     return await entity;
                 }
             }
