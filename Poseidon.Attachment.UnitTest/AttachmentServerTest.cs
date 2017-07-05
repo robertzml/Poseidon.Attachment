@@ -74,7 +74,7 @@ namespace Poseidon.Attachment.UnitTest
             string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\123.jpg";
 
             UploadInfo info = new UploadInfo();
-            info.Name = "22";
+            info.Name = "兔斯基";
             info.Remark = "8dfs";
             info.LocalPath = filePath;
 

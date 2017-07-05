@@ -47,6 +47,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
             };
 
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(Path.GetFileName(uploadInfo.LocalPath)));
+            fileContent.Headers.ContentType.CharSet = "utf-8";
             fileContent.Headers.Add("name", uploadInfo.Name);
             fileContent.Headers.Add("remark", uploadInfo.Remark);
 
@@ -72,6 +73,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
 
                 using (var content = new MultipartFormDataContent())//表明是通过multipart/form-data的方式上传数据  
                 {
+                    content.Headers.ContentType.CharSet = "utf-8";
                     var fileContent = SetFileByteArrayContent(data);
                     content.Add(fileContent);
 
@@ -81,7 +83,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
 
                     response.EnsureSuccessStatusCode();
                     var entity = response.Content.ReadAsAsync<List<Attachment>>();
-                                        
+
                     return await entity;
                 }
             }
