@@ -28,7 +28,6 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
         /// <param name="controller">控制器</param>
         public AttachmentService() : base("attachment")
         {
-            this.host = "http://localhost:4341/api/";
         }
         #endregion //Constructor
 

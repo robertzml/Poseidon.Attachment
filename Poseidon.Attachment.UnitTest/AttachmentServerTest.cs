@@ -28,6 +28,8 @@ namespace Poseidon.Attachment.UnitTest
             Cache.Instance.Add("DALPrefix", "Mongo");
 
             Cache.Instance.Add("CallerType", "webapi");
+
+            Cache.Instance.Add("ApiHost", "http://localhost:4341/api/");
         }
         #endregion //Constructor
 
@@ -59,7 +61,7 @@ namespace Poseidon.Attachment.UnitTest
 
             Assert.IsTrue(attachment.Count() > 0);
 
-            foreach(var item in attachment)
+            foreach (var item in attachment)
             {
                 Console.WriteLine(item.FileName);
             }
