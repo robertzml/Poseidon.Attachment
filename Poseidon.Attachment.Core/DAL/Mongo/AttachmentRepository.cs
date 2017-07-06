@@ -40,6 +40,7 @@ namespace Poseidon.Attachment.Core.DAL.Mongo
             entity.Id = doc["_id"].ToString();
             entity.Name = doc["name"].ToString();
             entity.FileName = doc["fileName"].ToString();
+            entity.OriginName = doc["originName"].ToString();
             entity.Extension = doc["extension"].ToString();
             entity.ContentType = doc["contentType"].ToString();
             entity.Folder = doc["folder"].ToString();
@@ -62,6 +63,7 @@ namespace Poseidon.Attachment.Core.DAL.Mongo
             {
                 { "name", entity.Name },
                 { "fileName", entity.FileName },
+                { "originName", entity.OriginName },
                 { "extension", entity.Extension },
                 { "contentType", entity.ContentType },
                 { "folder", entity.Folder },

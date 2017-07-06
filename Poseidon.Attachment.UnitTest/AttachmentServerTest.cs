@@ -71,7 +71,7 @@ namespace Poseidon.Attachment.UnitTest
         [TestMethod]
         public void TestUpload1()
         {
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\123.jpg";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\文档.doc";
 
             UploadInfo info = new UploadInfo();
             info.Name = "兔斯基";
@@ -82,7 +82,7 @@ namespace Poseidon.Attachment.UnitTest
 
             var attachment = result.Result;
 
-            Assert.AreEqual(info.Name, attachment.First().Name);
+            Assert.AreEqual(info.Name, attachment.Name);
         }
         #endregion //Test
     }

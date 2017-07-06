@@ -38,7 +38,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
         /// </summary>
         /// <param name="uploadInfo">上传文件信息</param>
         /// <returns></returns>
-        private ByteArrayContent SetFileByteArrayContent(UploadInfo uploadInfo)
+        private ByteArrayContent SetFileContent(UploadInfo uploadInfo)
         {
             var fileContent = new ByteArrayContent(File.ReadAllBytes(uploadInfo.LocalPath));
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
@@ -48,13 +48,37 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
 
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(Path.GetFileName(uploadInfo.LocalPath)));
             fileContent.Headers.ContentType.CharSet = "utf-8";
-            fileContent.Headers.Add("name", uploadInfo.Name);
-            fileContent.Headers.Add("remark", uploadInfo.Remark);
 
             string md5Hash = Hasher.GetFileMD5Hash(uploadInfo.LocalPath);
             fileContent.Headers.Add("md5hash", md5Hash);
 
             return fileContent;
+        }
+
+        /// <summary>
+        /// 设置文件附加信息
+        /// </summary>
+        /// <param name="uploadInfo">上传文件信息</param>
+        /// <returns></returns>
+        private List<ByteArrayContent> SetFormContent(UploadInfo uploadInfo)
+        {
+            List<ByteArrayContent> list = new List<ByteArrayContent>();
+
+            var nameContent = new ByteArrayContent(Encoding.UTF8.GetBytes(uploadInfo.Name));
+            nameContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                Name = "name"
+            };
+            list.Add(nameContent);
+
+            var remarkContent = new ByteArrayContent(Encoding.UTF8.GetBytes(uploadInfo.Remark));
+            remarkContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                Name = "remark"
+            };
+            list.Add(remarkContent);
+
+            return list;
         }
         #endregion //Function
 
@@ -64,7 +88,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        public async Task<List<Attachment>> Upload(UploadInfo data)
+        public async Task<Attachment> Upload(UploadInfo data)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -74,38 +98,13 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
                 using (var content = new MultipartFormDataContent())//表明是通过multipart/form-data的方式上传数据  
                 {
                     content.Headers.ContentType.CharSet = "utf-8";
-                    var fileContent = SetFileByteArrayContent(data);
+                    var fileContent = SetFileContent(data);
                     content.Add(fileContent);
 
-                    string url = this.host + "upload/";
-
-                    var response = await client.PostAsync(url, content);
-
-                    response.EnsureSuccessStatusCode();
-                    var entity = response.Content.ReadAsAsync<List<Attachment>>();
-
-                    return await entity;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 上传多个附件
-        /// </summary>
-        /// <param name="data">上传附件信息</param>
-        /// <returns></returns>
-        public async Task<List<Attachment>> Upload(List<UploadInfo> data)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Accept.Clear();
-
-                using (var content = new MultipartFormDataContent())//表明是通过multipart/form-data的方式上传数据  
-                {
-                    foreach (var item in data)
+                    var formContent = SetFormContent(data);
+                    foreach (var byteContent in formContent)
                     {
-                        var fileContent = SetFileByteArrayContent(item);
-                        content.Add(fileContent);
+                        content.Add(byteContent);
                     }
 
                     string url = this.host + "upload/";
@@ -113,7 +112,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
                     var response = await client.PostAsync(url, content);
 
                     response.EnsureSuccessStatusCode();
-                    var entity = response.Content.ReadAsAsync<List<Attachment>>();
+                    var entity = response.Content.ReadAsAsync<Attachment>();
 
                     return await entity;
                 }

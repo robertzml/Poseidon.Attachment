@@ -28,6 +28,12 @@ namespace Poseidon.Attachment.Core.DL
         public string FileName { get; set; }
 
         /// <summary>
+        /// 原始文件名
+        /// </summary>
+        [Display(Name = "原始文件名")]
+        public string OriginName { get; set; }
+
+        /// <summary>
         /// 扩展名
         /// </summary>
         [Display(Name = "扩展名")]

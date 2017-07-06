@@ -40,17 +40,7 @@ namespace Poseidon.Attachment.Caller.WinformCaller
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        public async Task<List<Attachment>> Upload(UploadInfo data)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 上传多个附件
-        /// </summary>
-        /// <param name="data">上传附件信息</param>
-        /// <returns></returns>
-        public async Task<List<Attachment>> Upload(List<UploadInfo> data)
+        public async Task<Attachment> Upload(UploadInfo data)
         {
             throw new NotImplementedException();
         }
