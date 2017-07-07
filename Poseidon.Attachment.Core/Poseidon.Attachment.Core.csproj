@@ -68,6 +68,7 @@
     <Compile Include="DL\Attachment.cs" />
     <Compile Include="IDAL\IAttachmentRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\IAttachmentEntity.cs" />
     <Compile Include="Utility\UploadInfo.cs" />
   </ItemGroup>
   <ItemGroup>
