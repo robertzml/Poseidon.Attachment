@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,15 @@ namespace Poseidon.Attachment.Caller.WinformCaller
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
         public Attachment Upload(UploadInfo data)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 同步下载附件
+        /// </summary>
+        /// <param name="id"></param>
+        public Stream Download(string id)
         {
             throw new NotImplementedException();
         }

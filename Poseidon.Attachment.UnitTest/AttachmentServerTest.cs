@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -105,6 +106,18 @@ namespace Poseidon.Attachment.UnitTest
             var attachment = result;
 
             Assert.AreEqual(info.Name, attachment.Name);
+        }
+
+        /// <summary>
+        /// 下载测试
+        /// </summary>
+        [TestMethod]
+        public void TestDownload()
+        {
+            string id = "59648851672e2239b85b00d3";
+            var stream = CallerFactory<IAttachmentService>.GetInstance(CallerType.WebApi).Download(id);
+
+            
         }
         #endregion //Test
     }

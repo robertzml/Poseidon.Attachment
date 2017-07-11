@@ -153,6 +153,28 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
                 }
             }
         }
+
+        /// <summary>
+        /// 同步下载附件
+        /// </summary>
+        /// <param name="id"></param>
+        public Stream Download(string id)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+
+                string url = this.host + "upload/" + id;
+
+                var response = client.GetAsync(url).Result;
+
+                response.EnsureSuccessStatusCode();
+
+                var stream = response.Content.ReadAsStreamAsync().Result;
+
+                return stream;
+            }
+        }
         #endregion //Method
     }
 }
