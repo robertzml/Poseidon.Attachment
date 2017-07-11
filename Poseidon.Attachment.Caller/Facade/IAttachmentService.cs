@@ -16,10 +16,17 @@ namespace Poseidon.Attachment.Caller.Facade
     public interface IAttachmentService : IBaseService<Attachment>
     {
         /// <summary>
-        /// 上传单个附件
+        /// 异步上传单个附件
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        Task<Attachment> Upload(UploadInfo data);
+        Task<Attachment> UploadAsync(UploadInfo data);
+
+        /// <summary>
+        /// 同步上传单个附件
+        /// </summary>
+        /// <param name="data">上传附件信息</param>
+        /// <returns></returns>
+        Attachment Upload(UploadInfo data);
     }
 }

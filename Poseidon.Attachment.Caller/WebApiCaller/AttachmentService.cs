@@ -83,11 +83,11 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
 
         #region Method
         /// <summary>
-        /// 上传单个附件
+        /// 异步上传单个附件
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        public async Task<Attachment> Upload(UploadInfo data)
+        public async Task<Attachment> UploadAsync(UploadInfo data)
         {
             using (HttpClient client = new HttpClient())
             {
@@ -114,6 +114,42 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
                     var entity = response.Content.ReadAsAsync<Attachment>();
 
                     return await entity;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 同步上传单个附件
+        /// </summary>
+        /// <param name="data">上传附件信息</param>
+        /// <returns></returns>
+        public Attachment Upload(UploadInfo data)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                using (var content = new MultipartFormDataContent())//表明是通过multipart/form-data的方式上传数据  
+                {
+                    content.Headers.ContentType.CharSet = "utf-8";
+                    var fileContent = SetFileContent(data);
+                    content.Add(fileContent);
+
+                    var formContent = SetFormContent(data);
+                    foreach (var byteContent in formContent)
+                    {
+                        content.Add(byteContent);
+                    }
+
+                    string url = this.host + "upload/";
+
+                    var response = client.PostAsync(url, content).Result;
+
+                    response.EnsureSuccessStatusCode();
+                    var entity = response.Content.ReadAsAsync<Attachment>().Result;
+
+                    return entity;
                 }
             }
         }

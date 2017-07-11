@@ -36,11 +36,21 @@ namespace Poseidon.Attachment.Caller.WinformCaller
 
         #region Method
         /// <summary>
-        /// 上传单个附件
+        /// 异步上传单个附件
         /// </summary>
         /// <param name="data">上传附件信息</param>
         /// <returns></returns>
-        public async Task<Attachment> Upload(UploadInfo data)
+        public async Task<Attachment> UploadAsync(UploadInfo data)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 同步上传单个附件
+        /// </summary>
+        /// <param name="data">上传附件信息</param>
+        /// <returns></returns>
+        public Attachment Upload(UploadInfo data)
         {
             throw new NotImplementedException();
         }

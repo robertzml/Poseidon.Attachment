@@ -80,9 +80,29 @@ namespace Poseidon.Attachment.UnitTest
             info.Remark = "8dfs";
             info.LocalPath = filePath;
 
-            var result = CallerFactory<IAttachmentService>.Instance.Upload(info);
+            var result = CallerFactory<IAttachmentService>.GetInstance(CallerType.WebApi).UploadAsync(info);
 
             var attachment = result.Result;
+
+            Assert.AreEqual(info.Name, attachment.Name);
+        }
+
+        /// <summary>
+        /// 测试上传
+        /// </summary>
+        [TestMethod]
+        public void TestUpload2()
+        {
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + "\\文档.doc";
+
+            UploadInfo info = new UploadInfo();
+            info.Name = "兔斯基";
+            info.Remark = "qwert";
+            info.LocalPath = filePath;
+
+            var result = CallerFactory<IAttachmentService>.GetInstance(CallerType.WebApi).Upload(info);
+
+            var attachment = result;
 
             Assert.AreEqual(info.Name, attachment.Name);
         }
