@@ -28,7 +28,7 @@ namespace Poseidon.Attachment.Core.DAL.Mongo
         }
         #endregion //Constructor
 
-        #region Method
+        #region Function
         /// <summary>
         /// BsonDocument转实体对象
         /// </summary>
@@ -75,6 +75,9 @@ namespace Poseidon.Attachment.Core.DAL.Mongo
 
             return doc;
         }
+        #endregion //Funtion
+
+        #region Method
         #endregion //Method
     }
 }
