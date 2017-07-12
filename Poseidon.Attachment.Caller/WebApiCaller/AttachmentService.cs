@@ -14,6 +14,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
     using Poseidon.Attachment.Core.DL;
     using Poseidon.Attachment.Core.Utility;
     using Poseidon.Base.Framework;
+    using Poseidon.Base.System;
     using Poseidon.Common;
 
     /// <summary>
@@ -168,11 +169,15 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
 
                 var response = client.GetAsync(url).Result;
 
-                response.EnsureSuccessStatusCode();
-
-                var stream = response.Content.ReadAsStreamAsync().Result;
-
-                return stream;
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    var stream = response.Content.ReadAsStreamAsync().Result;
+                    return stream;
+                }
+                else
+                {
+                    throw new PoseidonException(ErrorCode.HTTPError, response.StatusCode);
+                }
             }
         }
         #endregion //Method
