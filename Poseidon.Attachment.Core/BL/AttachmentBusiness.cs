@@ -24,5 +24,17 @@ namespace Poseidon.Attachment.Core.BL
             this.baseDal = RepositoryFactory<IAttachmentRepository>.Instance;
         }
         #endregion //Constructor
+
+        #region Method
+        /// <summary>
+        /// 获取文件夹列表
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetFolders()
+        {
+            var dal = this.baseDal as IAttachmentRepository;
+            return dal.GetFolders();
+        }
+        #endregion //Method
     }
 }

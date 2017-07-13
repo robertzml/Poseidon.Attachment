@@ -35,5 +35,18 @@ namespace Poseidon.Attachment.Caller.Facade
         /// </summary>
         /// <param name="id"></param>
         Stream Download(string id);
+        
+        /// <summary>
+        /// 按文件夹获取附件
+        /// </summary>
+        /// <param name="folder">文件夹</param>
+        /// <returns></returns>
+        IEnumerable<Attachment> FindByFolder(string folder);
+
+        /// <summary>
+        /// 获取文件夹列表
+        /// </summary>
+        /// <returns></returns>
+        List<string> GetFolders();
     }
 }

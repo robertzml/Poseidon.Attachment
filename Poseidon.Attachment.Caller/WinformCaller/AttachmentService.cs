@@ -64,6 +64,25 @@ namespace Poseidon.Attachment.Caller.WinformCaller
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// 按文件夹获取附件
+        /// </summary>
+        /// <param name="folder">文件夹</param>
+        /// <returns></returns>
+        public IEnumerable<Attachment> FindByFolder(string folder)
+        {
+            return this.bl.FindListByField("folder", folder);
+        }
+
+        /// <summary>
+        /// 获取文件夹列表
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetFolders()
+        {
+            return this.bl.GetFolders();
+        }
         #endregion //Method
     }
 }

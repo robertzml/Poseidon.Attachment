@@ -60,6 +60,33 @@ namespace Poseidon.Attachment.UnitTest
                 Console.WriteLine("id:{0}, name:{1}", item.Id, item.Name);
             }
         }
+
+        [TestMethod]
+        public void TestFindByFolder()
+        {
+            string folder = "2017-07";
+
+            var data = CallerFactory<IAttachmentService>.GetInstance(CallerType.Win).FindByFolder(folder);
+
+            Assert.IsTrue(data.Count() > 0);
+            foreach (var item in data)
+            {
+                Console.WriteLine("id:{0}, name:{1}", item.Id, item.Name);
+            }
+        }
+
+        [TestMethod]
+        public void TestGroupByFolder()
+        {
+            var data = BusinessFactory<AttachmentBusiness>.Instance.GetFolders();
+
+            Assert.IsTrue(data.Count > 0);
+
+            foreach(var item in data)
+            {
+                Console.WriteLine("name:{0}", item);
+            }
+        }
         #endregion //Test
     }
 }

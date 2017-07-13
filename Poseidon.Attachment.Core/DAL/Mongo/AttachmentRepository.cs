@@ -78,6 +78,29 @@ namespace Poseidon.Attachment.Core.DAL.Mongo
         #endregion //Funtion
 
         #region Method
+        /// <summary>
+        /// 获取文件夹列表
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetFolders()
+        {
+            FilterDefinition<BsonDocument> match = "{}";
+
+            ProjectionDefinition<BsonDocument, BsonDocument> group = new BsonDocument
+            {
+                { "_id", "$folder" }
+            };
+
+            var result = base.Aggregate(match, group);
+
+            List<string> folders = new List<string>();
+            foreach(var item in result)
+            {
+                folders.Add(item["_id"].ToString());
+            }
+
+            return folders;
+        }
         #endregion //Method
     }
 }

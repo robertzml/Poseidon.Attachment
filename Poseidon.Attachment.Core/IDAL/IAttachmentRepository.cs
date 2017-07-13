@@ -14,5 +14,10 @@ namespace Poseidon.Attachment.Core.IDAL
     /// </summary>
     internal interface IAttachmentRepository : IBaseDAL<Attachment>
     {
+        /// <summary>
+        /// 获取文件夹列表
+        /// </summary>
+        /// <returns></returns>
+        List<string> GetFolders();
     }
 }

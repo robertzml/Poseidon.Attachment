@@ -180,6 +180,25 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
                 }
             }
         }
+
+        /// <summary>
+        /// 按文件夹获取附件
+        /// </summary>
+        /// <param name="folder">文件夹</param>
+        /// <returns></returns>
+        public IEnumerable<Attachment> FindByFolder(string folder)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 获取文件夹列表
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetFolders()
+        {
+            throw new NotImplementedException();
+        }
         #endregion //Method
     }
 }
