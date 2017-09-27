@@ -43,7 +43,7 @@ namespace Poseidon.Attachment.Caller.WebApiCaller
             var fileContent = new ByteArrayContent(File.ReadAllBytes(uploadInfo.LocalPath));
             fileContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = Path.GetFileName(uploadInfo.LocalPath)
+                FileName = Path.GetFileNameWithoutExtension(uploadInfo.LocalPath) + Path.GetExtension(uploadInfo.LocalPath).ToLower()
             };
 
             fileContent.Headers.ContentType = new MediaTypeHeaderValue(MimeMapping.GetMimeMapping(Path.GetFileName(uploadInfo.LocalPath)));
