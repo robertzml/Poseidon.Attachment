@@ -44,7 +44,7 @@ namespace Poseidon.Attachment.Core.DAL.Mongo
             entity.Extension = doc["extension"].ToString();
             entity.ContentType = doc["contentType"].ToString();
             entity.Folder = doc["folder"].ToString();
-            entity.Size = doc["size"].ToInt32();
+            entity.Size = doc["size"].ToInt64();
             entity.UploadTime = doc["uploadTime"].ToLocalTime();
             entity.MD5Hash = doc["md5hash"].ToString();
             entity.Remark = doc["remark"].ToString();
